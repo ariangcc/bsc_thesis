@@ -16,22 +16,14 @@ class WaterSegmentation(object):
         self.model = model_utils.load_model(model_path)
 
     def image_loader(self, img):
+        '''Preprocesa una imagen para ser apta para entrar en el modelo de segmentación.'''
         img = preprocess_image(img)
         return img
 
-    def predict(self, image, save_flag):
-        # patch_meta = {}
-        # patch_meta['width'] = 512
-        # patch_meta['height'] = 512
-        # patch_meta['dtype'] = np.uint16
-        # patch_meta['driver'] = 'GTiff'
-        # patch_meta['count'] = 4
-        # if save_flag:
-        #     with rio.open(os.path.join(UPLOAD_DIRECTORY, 'patch.TIF'), 'w', **patch_meta) as outds:
-        #         outds.write(image)
+    def predict(self, image):
+        '''Procesa una imagen satelital, previamente preprocesada, mediante un modelo de segmentación y devuelve una máscara que señala los cuerpos de agua de la imagen original.'''
         
         img_input = self.image_loader(image)
-        #print(img_input.shape, img_input.max(), img_input.min())
         trained_model = self.model
         response = model_utils.run_model(img_input,trained_model)
        	del trained_model
