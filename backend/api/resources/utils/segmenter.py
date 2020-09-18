@@ -5,7 +5,7 @@ from PIL import Image
 from io import BytesIO
 import rasterio as rio
 import os
-UPLOAD_DIRECTORY = 'results/'
+UPLOAD_DIRECTORY = 'static/'
 
 import resources.utils.model_utils as model_utils
 
