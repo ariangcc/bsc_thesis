@@ -8,10 +8,10 @@ export function doSearchImages(top, bottom, left, right, startDate, endDate) {
     var body = {
         "start_date": startDate,
         "end_date": endDate,
-        "top": parseFloat(top),
-        "bottom": parseFloat(bottom),
-        "left": parseFloat(left),
-        "right": parseFloat(right)
+        "top": parseFloat(right),
+        "bottom": parseFloat(left),
+        "left": parseFloat(bottom),
+        "right": parseFloat(top)
     };
 
     console.log(body);
