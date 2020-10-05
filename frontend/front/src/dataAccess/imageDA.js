@@ -2,6 +2,12 @@ import axios from 'axios';
 
 export function doSearchImages(top, bottom, left, right, startDate, endDate) {
     let url = "http://localhost:9997/api/searchImages/";
+	
+	 let config = {
+		 headers:{
+			 'X-Requested-With': 'XMLHttpRequest'
+		 }
+	 };
 
     console.log(url)
 
@@ -16,7 +22,8 @@ export function doSearchImages(top, bottom, left, right, startDate, endDate) {
 
     console.log(body);
     console.log("Antes de mandar request")
-    return axios.post(url,body);
+	 console.log("Prueba con CORS")
+    return axios.post(url,body, config);
 }
 
 export function doCheckFiles(path){
