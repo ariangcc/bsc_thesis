@@ -4,9 +4,6 @@ from functools import reduce
 import itertools
 import torchvision.utils
 
-
-
-
 def values_metric(filedata,name_metric):
     m_metric = []
     for i in filedata:
