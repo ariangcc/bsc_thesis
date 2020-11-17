@@ -1,4 +1,6 @@
+models/*
 history_sftr/*
 __pycache__/*
 data/*
 .ipynb_checkpoints/*
+predictions_VHR/*

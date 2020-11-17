@@ -64,14 +64,22 @@ def print_metrics(metrics, file, phase='train', epoch_samples=1 ):
         file.write("{}: {}".format(phase, ", ".join(outputs)))    ### f
 
 def find_metrics(train_file_names,val_file_names, test_file_names, max_values, mean_values, std_values,model,fold_out='0', fold_in='0',  name_model='UNet11', epochs='40',out_file='VHR',dataset_file='VHR' ,name_file='_VHR_60_fake' ):
-                            
+    
+    def make_loader(file_names, shuffle=False, transform=None, limit=None,  mode = "train",batch_size=4,limite=None) :
+        return DataLoader(
+            dataset=WaterDataset(file_names, transform=transform, mode = mode,limit=limit),
+            shuffle=shuffle,
+            batch_size= batch_size,
+            pin_memory=False
+        )
+
     outfile_path = ('predictions_{}').format(out_file)
         
     f = open(("predictions_{}/metric{}_{}_foldout{}_foldin{}_{}epochs.txt").format(out_file,name_file,name_model,fold_out, fold_in,epochs), "w+")
     f2 = open(("predictions_{}/pred_loss_test{}_{}_foldout{}_foldin{}_{}epochs.txt").format(out_file,name_file,name_model, fold_out, fold_in,epochs), "w+")
     f.write("Training mean_values:[{}], std_values:[{}] \n".format(mean_values, std_values))
 
-    device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
+    device = torch.device("cuda:1" if torch.cuda.is_available() else "cpu")
     
     #####Dilenames ###############################################
 
