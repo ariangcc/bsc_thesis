@@ -1,6 +1,13 @@
 import torch
 import torch.nn as nn
 
+def dice_coef(pred, target, smooth = 1.):
+    pred = pred.contiguous()
+    target = target.contiguous()    
+    intersection = (pred * target).sum(dim=2).sum(dim=2)
+    cdice = (2. * intersection + smooth) / (pred.sum(dim=2).sum(dim=2) + target.sum(dim=2).sum(dim=2) + smooth) #1-Dice
+    return cdice.mean() #mean of the batch
+
 def dice_loss(pred, target, smooth = 1.):
     pred = pred.contiguous()
     target = target.contiguous()    

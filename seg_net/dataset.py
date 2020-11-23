@@ -37,13 +37,17 @@ class WaterDataset(Dataset):
 
         if self.mode == 'train':
             mask = load_mask(img_file_name)
-
-            img, mask = self.transform(img, mask)
+            augmented = self.transform(image=img,mask=mask)
+            img = augmented["image"]
+            mask = augmented["mask"]
 
             return to_float_tensor(img), torch.from_numpy(np.expand_dims(mask, 0)).float()
         else:
             mask = np.zeros(img.shape[:2])
-            img, mask = self.transform(img, mask)
+
+            augmented = self.transform(image=img,mask=mask)
+            img = augmented["image"]
+            mask = augmented["mask"]
 
             return to_float_tensor(img), str(img_file_name) 
 
